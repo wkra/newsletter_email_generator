@@ -4,80 +4,81 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Newsletter generator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 
 </head>
 <body>
-  <div id="app"> {{message}}
-    <input @change="onUpload" type="file" name="client-file" id="get-files" multiple>
-    <h1>{{inputData}}</h1>
-    <div v-if="showTemplate">
-      <h1>Twój szablon będzie wyglądał tak:</h1>
-      <div v-for="img in imgs">
-        <img v-if="img.src" :src="img.src" alt="">
+  <div id="app" v-show="isVueInit" style="display: none">
+    <input @change="onUpload" type="file" multiple>
+    <div v-show="showTemplate">
+      <h2>Twoje pliki</h2>
+      <div class="newsletter-files">
+            <div class="file" v-for="img in imgs">
+                <span v-show="img.name">{{img.name}}</span>
+            </div>
+      </div>
+      <button class="btn btn--sort" @click="sortImgs">Sortuj <span v-text="sortDirection"></span></button>
+      <h2>Twój newsletter będzie wyglądał tak:</h1>
+      <div class="newsletter-view">
+          <table cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
+              <tr>
+                <td>
+                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center">
+                  <tr v-for="(img, index) in imgs">
+                    <td :height="img.height" valign="top">
+                      <img :src="img.src" alt="">
+                      <button class="btn btn--remove" @click="removeImg(index)">Remove Img</button>
+                    </td>
+                  </tr>
+                </table>
+            
+            
+                </td>
+              </tr>
+              </table>
       </div>
       
-      <h1>Twój kod to:</h1>
-      <div v-for="img in imgs">
-        <span v-if="img.name">{{img.name}}</span><span>- height:</span><span v-if="img.height">{{img.height}}</span>
+      
+      <h2>Twój kod newslettera to:</h2>
+      <div class="code" >
+        <span>&#60;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&#62;
+
+            &#60;html xmlns="http://www.w3.org/1999/xhtml"&#62;
+            &#60;head&#62;
+              &#60;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&#62;
+              &#60;meta name="viewport" content="width=device-width, initial-scale=1.0"/&#62;
+              &#60;title&#62;Your Message Subject or Title&#60;/title&#62;
+            
+            &#60;/head&#62;
+            &#60;body&#62;
+              &#60;table cellpadding="0" cellspacing="0" border="0" id="backgroundTable"&#62;
+              &#60;tr&#62;
+                &#60;td&#62;
+                &#60;table width="600" cellpadding="0" cellspacing="0" border="0" align="center"&#62;</span>
+                <div v-for="img in imgs">
+                      &#60;tr&#62;
+                      &#60;td width ="600" height="{{img.height}}" valign="top"&#62;
+                      &#60;a href="#"&#62;
+                      &#60;img src="{{img.name}}" width="600" height="{{img.height}}"alt=""&#62;
+                      &#60;/a&#62;
+                      &#60;/td&#62;
+                      &#60;/tr&#62;
+                </div>
+            &#60;/table&#62;
+            &#60;/td&#62;
+          &#60;/tr&#62;
+          &#60;/table&#62;
+        &#60;/body&#62;
+        &#60;/html&#62;
+        </span>
       </div>
 
     </div>
   </div>
 
 
-<script>
-var app = new Vue({
-  el: '#app',
-  data: function() {
-    return {
-      message: 'Hello Vue!',
-      inputData: '',
-      imgs: []
-    }
-  },
-  computed: {
-    showTemplate: function(){
-      return this.imgs.length;
-    }
-  },
-  methods: {
-    onUpload: function(e) {
-      var files = e.target.files || e.dataTransfer.files,
-      img;
-      debugger;
-      if (files.length) {
-        this.getFilesAttributes(files);
-      }
-    },
-    getFilesAttributes: function(files) {
-      var img,
-      imgsLength = this.imgs.length;
-      for (i=0; i < files.length; i++) {
-        this.imgs.push(
-          {name: files[i].name,
-          height: 0,
-          src: false});
-        img = new Image();
-          var reader = new FileReader();
-
-        img.src = window.URL.createObjectURL( files[i] );
-
-        this.getFileHeight(img, imgsLength + i);
-        
-      }
-    },
-    getFileHeight: function(img, index) {
-      var self = this;
-      img.onload = function() {
-        console.log(index)
-          self.imgs[index].height = img.naturalHeight;
-          self.imgs[index].src = img.src
-
-      };
-    }
-  }
-})
-</script>
+  <script src="js/main.js" async defer></script>
 </body>
 </html>
