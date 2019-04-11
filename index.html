@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Newsletter generator</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+
+</head>
+<body>
+  <div id="app"> {{message}}
+    <input @change="onUpload" type="file" name="client-file" id="get-files" multiple>
+    <h1>{{inputData}}</h1>
+    <div v-if="showTemplate">
+      <h1>Twój szablon będzie wyglądał tak:</h1>
+      <div v-for="img in imgs">
+        <img v-if="img.src" :src="img.src" alt="">
+      </div>
+      
+      <h1>Twój kod to:</h1>
+      <div v-for="img in imgs">
+        <span v-if="img.name">{{img.name}}</span><span>- height:</span><span v-if="img.height">{{img.height}}</span>
+      </div>
+
+    </div>
+  </div>
+
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: function() {
+    return {
+      message: 'Hello Vue!',
+      inputData: '',
+      imgs: []
+    }
+  },
+  computed: {
+    showTemplate: function(){
+      return this.imgs.length;
+    }
+  },
+  methods: {
+    onUpload: function(e) {
+      var files = e.target.files || e.dataTransfer.files,
+      img;
+      debugger;
+      if (files.length) {
+        this.getFilesAttributes(files);
+      }
+    },
+    getFilesAttributes: function(files) {
+      var img,
+      imgsLength = this.imgs.length;
+      for (i=0; i < files.length; i++) {
+        this.imgs.push(
+          {name: files[i].name,
+          height: 0,
+          src: false});
+        img = new Image();
+          var reader = new FileReader();
+
+        img.src = window.URL.createObjectURL( files[i] );
+
+        this.getFileHeight(img, imgsLength + i);
+        
+      }
+    },
+    getFileHeight: function(img, index) {
+      var self = this;
+      img.onload = function() {
+        console.log(index)
+          self.imgs[index].height = img.naturalHeight;
+          self.imgs[index].src = img.src
+
+      };
+    }
+  }
+})
+</script>
+</body>
+</html>
