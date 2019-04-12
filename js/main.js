@@ -61,6 +61,10 @@ var app = new Vue({
     },
     changeSortDirection: function(){
       this.sortDirection = this.sortDirection.split('').reverse().join('')
+    },
+    move: function(old_index, new_index) {
+      var arr = this.imgs;
+      arr.splice(new_index, 0, arr.splice(old_index, 1)[0]);
     }
   }
 })

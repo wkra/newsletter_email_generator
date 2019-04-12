@@ -20,7 +20,9 @@
           <div class="file" v-for="(img, index) in imgs">
             <span v-show="img.name"><span v-text="index + 1"></span>. {{ img.name }}</span>
             <input v-model="img.url">
-            <button @click="removeImg(index)">Usuń</button>
+            <button type="button" name="remove" @click="removeImg(index)">remove</button>
+            <button v-show="index > 0" @click="move(index, index - 1)" type="button" name="up">up</button>
+            <button v-show="index < imgs.length - 1" @click="move(index, index + 1)" type="button" name="down">down</button>
           </div>
         </div>
         <button class="btn btn--sort" @click="sortImgs">
