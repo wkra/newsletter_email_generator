@@ -19,6 +19,7 @@
         <div class="newsletter-files">
           <div class="file" v-for="(img, index) in imgs">
             <span v-show="img.name"><span v-text="index + 1"></span>. {{ img.name }}</span>
+            <input v-model="img.url">
           </div>
         </div>
         <button class="btn btn--sort" @click="sortImgs">

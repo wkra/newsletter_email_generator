@@ -30,7 +30,7 @@ var app = new Vue({
           {name: files[i].name,
           height: 0,
           src: img.src,
-          url: 'xxx'});
+          url: '#'});
 
         this.getFileHeight(img, imgsLength + i);
 
