@@ -5,7 +5,7 @@ var app = new Vue({
       isVueInit: true,
       imgs: [],
       sortDirection: 'a-z',
-      filesType: ['image/jpeg', 'image/gif']
+      filesType: ['image/jpeg', 'image/gif', 'image/png']
     }
   },
   computed: {
