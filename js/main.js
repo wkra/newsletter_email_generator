@@ -5,6 +5,7 @@ var app = new Vue({
       isVueInit: true,
       imgs: [],
       sortDirection: 'a-z',
+      filesType: ['image/jpeg', 'image/gif']
     }
   },
   computed: {
@@ -21,19 +22,21 @@ var app = new Vue({
     },
     getFilesAttributes: function(files) {
       var img,
-      imgsLength = this.imgs.length;
+      file;
       for (i=0; i < files.length; i++) {
-        img = new Image();
-        img.src = window.URL.createObjectURL( files[i] );
+        file = files[i];
+        if (this.filesType.indexOf(file.type) > -1) {
+          img = new Image();
+          img.src = window.URL.createObjectURL( files[i] );
 
-        this.imgs.push(
-          {name: files[i].name,
-          height: 0,
-          src: img.src,
-          url: '#'});
+          this.imgs.push(
+            {name: files[i].name,
+            height: 0,
+            src: img.src,
+            url: '#'});
 
-        this.getFileHeight(img, imgsLength + i);
-
+          this.getFileHeight(img, this.imgs.length -1);
+        }
       }
     },
     getFileHeight: function(img, index) {
