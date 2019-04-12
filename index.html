@@ -26,68 +26,57 @@
         </button>
         <h2>Twój newsletter będzie wyglądał tak:</h2>
         <div class="newsletter-view">
-          <table
-            cellpadding="0"
-            cellspacing="0"
-            border="0"
-            id="backgroundTable"
-          >
-            <tr>
-              <td>
-                <table
-                  width="600"
-                  cellpadding="0"
-                  cellspacing="0"
-                  border="0"
-                  align="center"
-                >
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                  <td align="center" style="text-align: center;">
+                      <span style="display:none!important;font-size:0;line-height:0;margin:0;max-height:0">treść reklamowa</span>
+                      <table width="600" border="0" cellpadding="0" cellspacing="0" align="center">
                   <tr v-for="(img, index) in imgs">
-                    <td class="img-wrapper" :height="img.height" valign="top">
-                      <img :src="img.src" alt="" />
-                      <button class="btn btn--remove" @click="removeImg(index)">
-                        Remove Img
-                      </button>
-                    </td>
+                    <td width="600" :height="img.height">
+                              <a :href="img.url" target="_blank" style="outline: 0;">
+                                  <img :src="img.src" width="600" :height="img.height"
+                                       border="0" alt="" style="display:block;"></a></td>
                   </tr>
                 </table>
-              </td>
-            </tr>
-          </table>
+                <span style="display:none!important;font-size:0;line-height:0;margin:0;max-height:0">treść reklamowa</span>
+            </td>
+        </tr>
+    </table>
         </div>
 
         <h2>Twój kod newslettera to:</h2>
         <div class="code" >
-            <span>&#60;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&#62;
-    
-                &#60;html xmlns="http://www.w3.org/1999/xhtml"&#62;
-                &#60;head&#62;
-                  &#60;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&#62;
-                  &#60;meta name="viewport" content="width=device-width, initial-scale=1.0"/&#62;
-                  &#60;title&#62;Your Message Subject or Title&#60;/title&#62;
-                
-                &#60;/head&#62;
-                &#60;body&#62;
-                  &#60;table cellpadding="0" cellspacing="0" border="0" id="backgroundTable"&#62;
-                  &#60;tr&#62;
-                    &#60;td&#62;
-                    &#60;table width="600" cellpadding="0" cellspacing="0" border="0" align="center"&#62;</span>
-                    <div v-for="img in imgs">
-                          &#60;tr&#62;
-                          &#60;td width ="600" height="{{img.height}}" valign="top"&#62;
-                          &#60;a href="#"&#62;
-                          &#60;img src="{{img.name}}" width="600" height="{{img.height}}"alt=""&#62;
-                          &#60;/a&#62;
-                          &#60;/td&#62;
-                          &#60;/tr&#62;
-                    </div>
-                &#60;/table&#62;
-                &#60;/td&#62;
+            <span>&#60;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&#62;
+              &#60;html&#62;
+              &#60;head&#62;
+              &#60;title&#62;NDG&#60;/title&#62;
+              &#60;meta http-equiv="Content-Type" content="text/html; charset=utf-8"&#62;
+              &#60;/head&#62;
+              &#60;body&#62;
+              &#60;table width="100%" border="0" cellpadding="0" cellspacing="0"&#62;
+              &#60;tr&#62;
+              &#60;td align="center" style="text-align: center;"&#62;
+              &#60;span style="display:none!important;font-size:0;line-height:0;margin:0;max-height:0"&#62;treść reklamowa&#60;/span&#62;
+              &#60;table width="600" border="0" cellpadding="0" cellspacing="0" align="center"&#62;
+            </span>
+            <span v-for="img in imgs">&#60;tr&#62;
+              &#60;td width="600" height="{{img.height}}"&#62;
+              &#60;a href="{{img.url}}" target="_blank" style="outline: 0;"&#62;
+              &#60;img src="{{img.name}}" width="600" height="{{img.height}}" border="0" alt="" style="display:block;"&#62;
+              &#60;/a&#62;
+              &#60;/td&#62;
+              &#60;/tr&#62;
+            </span>
+            <span>&#60;/table&#62;
+              &#60;span style="display:none!important;font-size:0;line-height:0;margin:0;max-height:0"&#62;treść reklamowa&#60;/span&#62;
+              &#60;/td&#62;
               &#60;/tr&#62;
               &#60;/table&#62;
-            &#60;/body&#62;
-            &#60;/html&#62;
+              &#60;/body&#62;
+              &#60;/html&#62;
+            </span>
           </div>
-    
+
       </div>
     </div>
 

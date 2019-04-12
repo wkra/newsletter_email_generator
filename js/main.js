@@ -29,10 +29,11 @@ var app = new Vue({
         this.imgs.push(
           {name: files[i].name,
           height: 0,
-          src: img.src});
-      
+          src: img.src,
+          url: 'xxx'});
+
         this.getFileHeight(img, imgsLength + i);
-        
+
       }
     },
     getFileHeight: function(img, index) {
@@ -42,7 +43,7 @@ var app = new Vue({
       };
     },
     removeImg: function(index) {
-      this.imgs.splice(index, 1); 
+      this.imgs.splice(index, 1);
     },
     sortImgs: function () {
       this.imgs.sort(this.compareName);
